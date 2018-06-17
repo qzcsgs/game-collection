@@ -33,7 +33,7 @@ module.exports = {
       // 模板文件
       template: './src/com.eatBallGame.qzc/eatBallGame.html',
       // 打包后文件名称，会自动放到 output 指定的 dist 目录
-      filename: 'eatBallGame.html'
+      filename: 'index.html'
     }),
     new UglifyJsPlugin(),
     new CleanWebpackPlugin(['dist']),

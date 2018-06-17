@@ -1,0 +1,77 @@
+* {
+	box-sizing: border-box;
+}
+#game {
+	position: relative;
+	width: 800px;
+	height: 600px;
+	margin: 100px auto 0;
+	border: 1px solid red;
+}
+canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.game-planel {
+	/*置于画板之上*/
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #333;
+	color: #fff;
+}
+
+.game-start,
+.game-playing,
+.game-over {
+	display: none;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	font-size: 20px;
+}
+.game-start .section-title {
+	font-size: 50px;
+}
+#myName {
+	border: 1px solid #ccc;
+	height: 2em;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+#myName:focus {
+	box-shadow: 0 0 5px #CCFF66;
+}
+.game-start .section-myColor,
+.game-start .section-AiNum {
+	height: 2em;
+	margin-bottom: 10px;
+}
+.game-start .section-myColor:focus,
+.game-start .section-AiNum:focus {
+	box-shadow: 0 0 5px #CCFF66;
+}
+.game-start .section-button {
+	border: 1px solid #CCFF66;
+	background-color: #CCFF66;
+	color: #fff;
+	padding: 5px 10px 5px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+/*根据游戏状态显示组件*/
+[data-status="start"] .game-start,
+[data-status="over"] .game-over {
+	display: inline-block;
+}
+[data-status="start"] .game-planel,
+[data-status="over"] .game-planel {
+	display: block;
+}
