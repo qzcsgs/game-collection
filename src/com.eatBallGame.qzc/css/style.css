@@ -14,7 +14,7 @@ canvas {
 	height: 100%;
 }
 .game-planel {
-	/*置于画板之上*/
+	/* 置于画板之上 */
 	display: none;
 	position: absolute;
 	top: 0;
