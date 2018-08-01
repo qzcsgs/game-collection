@@ -1,7 +1,7 @@
 /**
  * 配置数据
  */
-export CONFIG = {
+export default CONFIG = {
 	score: 0,				// 得分，1:1体重计算
 	map_width: 1200,		// 地图宽度
 	map_height: 1200,		// 地图高度
