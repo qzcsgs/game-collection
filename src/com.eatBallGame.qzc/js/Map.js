@@ -3,7 +3,7 @@ import {CONFIG} from './CONFIG'
 /**
  * 地图类
  */
-class Map{
+class Map {
 	/**
 	 * 地图类构造函数，可以不传值
 	 * @param  {Object} attr 地图属性，分别有一下几种

@@ -1,6 +1,6 @@
 import Spherical from './Spherical'
 
-class Food extends {
+class Food extends Spherical {
 	construcor (attr) {
 		super(attr)
 	}

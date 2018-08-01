@@ -1,6 +1,6 @@
 import Spherical from './Spherical'
 
-class Vomit extends {
+class Vomit extends Spherical {
 	constructor (attr) {
 		super(attr)
 	}

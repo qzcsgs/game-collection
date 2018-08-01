@@ -1,6 +1,6 @@
 import Spherical from './Spherical'
 
-class AiPlayer extends {
+class AiPlayer extends Spherical {
 	construcor (attr) {
 		super(attr)
 	}
