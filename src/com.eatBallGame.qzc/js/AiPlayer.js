@@ -1,7 +1,7 @@
 import Spherical from './Spherical'
 
 class AiPlayer extends Spherical {
-	construcor (attr) {
+	constructor (attr) {
 		super(attr)
 	}
 

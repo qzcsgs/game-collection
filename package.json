@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "author": "QuZhiChao",
   "scripts": {
-    "dev": "webpack-dev-server --open",
-    "fix": "standard --fix"
+    "dev": "webpack-dev-server --mode development --config webpack.config.js",
+    "fix": "standard --fix",
+    "build": "npx webpack"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

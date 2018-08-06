@@ -43,3 +43,5 @@ class Game {
         requestAnimFrame(this.repaint)
     }
 }
+
+export default Game
