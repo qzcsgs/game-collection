@@ -61,3 +61,5 @@ class Spherical {
 	 */
 	draw () {}
 }
+
+export default Spherical
