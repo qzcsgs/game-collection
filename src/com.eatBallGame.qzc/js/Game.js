@@ -89,7 +89,7 @@ class Game {
    */
   updateConfig () {
     CONFIG.status = 'playing'
-    CONFIG.player_name = this.myName.value
+    CONFIG.player_name = this.myName.value || CONFIG.player_name
     CONFIG.player_color = this.sectionMyColor.value
     CONFIG.AiPlayer_num = this.sectionAiNum.value
 
