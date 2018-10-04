@@ -42,15 +42,36 @@ export default {
   },
   /**
    * 更新排行榜
+   * @param {Object} elem 排行DOM
+   * @param {Object} player 玩家实例
+   * @param {Array} aiPlayerList ai玩家实例列表
    */
-  updateRankingList (elem) {
+  updateRankingList (elem, player, aiPlayerList) {
+    const compare = (attr) => (a, b) => {
+      var value1 = a[attr]
+      var value2 = b[attr]
+      return value2 - value1
+    }
+    // 拼接玩家和ai成一个数组
+    const plList = aiPlayerList.concat(player)
+    // 排序
+    plList.sort(compare('weight'))
+    
+    let htmlText = []
 
+    plList.some((item, index) => {
+      // 第10次跳出
+      if (index === 10) return true
+      htmlText.push(`<li${item.name === CONFIG.player_name ? ' class="my"' : ''}>${index + 1}.${item.name}</li>`)
+    })
+
+    elem.innerHTML = htmlText.join('')
   },
   /**
    * 更新得分
    */
   updateScore (elem) {
-
+    elem.innerText = CONFIG.score
   },
   /**
    * 获得一个随机名字

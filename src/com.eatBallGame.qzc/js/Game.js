@@ -4,7 +4,6 @@ import Map from './Map'
 import AiPlayer from './AiPlayer'
 import Food from './Food'
 import Player from './Player'
-import Vomit from './Vomit'
 
 /**
  * 游戏类
@@ -172,7 +171,8 @@ class Game {
     // 更新得分
     UTIL.updateScore(this.score)
     // 更新排行
-    UTIL.updateRankingList(this.rankingList)
+    UTIL.updateRankingList(this.rankingList, this.player, this.aiPlayerList)
+
     requestAnimFrame(this.repaint.bind(this))
   }
 }
