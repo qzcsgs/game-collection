@@ -109,7 +109,9 @@ class Game {
     this.player = new Player({
       name: CONFIG.player_name,
       color: CONFIG.player_color,
-      weight: 100
+      weight: CONFIG.player_weight,
+      centerX: 800,
+      centerY: 600
     })
     console.log('玩家', this.player)
 
@@ -153,6 +155,8 @@ class Game {
     this.foodList.forEach((item) => {
       item.drawSelf(this.context)
     })
+    // 画出自己
+    this.player.drawSelf(this.context)
   }
 
   /**
