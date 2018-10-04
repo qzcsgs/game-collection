@@ -13,3 +13,5 @@ class AiPlayer extends Spherical {
 
 	}
 }
+
+export default AiPlayer

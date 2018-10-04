@@ -13,3 +13,5 @@ class Vomit extends Spherical {
 
 	}
 }
+
+export default Vomit

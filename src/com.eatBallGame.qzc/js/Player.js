@@ -33,3 +33,5 @@ class Player extends Spherical {
 
 	}
 }
+
+export default Player
