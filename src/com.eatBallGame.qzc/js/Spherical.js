@@ -1,3 +1,5 @@
+import UTIL from './UTIL'
+
 /**
  * 球类
  */
@@ -17,13 +19,13 @@ class Spherical {
   }
 
   init (attr) {
-    if (attr) return
+    if (!attr) return
 
-    this.name = attr.name
-    this.centerX = attr.centerX
-    this.centerY = attr.centerY
-    this.weight = attr.weight
-    this.color = attr.color
+    this.name = attr.name || ''
+    this.centerX = attr.centerX || UTIL.getRandomXY('x')
+    this.centerY = attr.centerY || UTIL.getRandomXY('y')
+    this.weight = attr.weight || UTIL.getRandomWeight()
+    this.color = attr.color || UTIL.getRandomColor()
   }
 
   /**

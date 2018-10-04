@@ -29,6 +29,10 @@ class Game {
     this.myName = document.getElementById('myName')
     this.sectionAiNum = document.querySelector('.section-aiNum')
 
+    // 得分，排行
+    this.score = document.querySelector('.score span')
+    this.rankingList = document.querySelector('.ranking-list')
+
     // 兼容定义 requestAnimFrame
     window.requestAnimFrame =
       window.requestAnimationFrame ||
@@ -41,6 +45,9 @@ class Game {
       }
     console.log('游戏配置', CONFIG)
     // 创建相应类实例
+    this.player = new Player({
+
+    })
 
     this.event()
   }
@@ -81,6 +88,7 @@ class Game {
     this.updateConfig()
     // 更新UI
     this.game.setAttribute('data-status', CONFIG.status)
+    this.repaint()
   }
 
   /**
@@ -96,10 +104,14 @@ class Game {
   }
 
   /**
-     * 重绘
-     */
+   * 重绘
+   */
   repaint () {
-    requestAnimFrame(this.repaint)
+    // 更新得分
+    UTIL.updateScore(this.score)
+    // 更新排行
+    UTIL.updateRankingList(this.rankingList)
+    requestAnimFrame(this.repaint.bind(this))
   }
 }
 
