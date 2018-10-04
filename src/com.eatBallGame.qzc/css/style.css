@@ -11,6 +11,7 @@ canvas {
 	display: block;
 	width: 100%;
 	height: 100%;
+	background: #777;
 }
 .game-planel {
 	/* 置于画板之上 */
@@ -20,7 +21,6 @@ canvas {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #777;
 	color: #fff;
 }
 

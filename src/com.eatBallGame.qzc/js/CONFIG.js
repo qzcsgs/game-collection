@@ -15,8 +15,9 @@ export default {
   score: 0,				// 得分，1:1体重计算
   map_width: 1200,		// 地图宽度
   map_height: 1200,		// 地图高度
-  map_bgColor: '#000', 	// 地图背景色
+  map_bgColor: '#777', 	// 地图背景色
   map_borderColor: 'red', // 地图边框颜色
+  map_padding: 100,   // 地图内边距
   player_name: '曲智超', 	// 玩家初始姓名
   player_color: 'gree', 	// 玩家初始颜色
   player_weight: 100, // 玩家初始体重

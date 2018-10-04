@@ -108,7 +108,9 @@ class Game {
 
     // 玩家实例
     this.player = new Player({
-      name: CONFIG.player_name
+      name: CONFIG.player_name,
+      color: CONFIG.player_color,
+      weight: 100
     })
     console.log('玩家', this.player)
 
@@ -137,14 +139,28 @@ class Game {
    * 游戏中的事件 
    */
   playingEvent () {
+    // 临时调试代码
+    document.onkeydown = () => {
+      console.log('qzc')
+      this.map.x+=100
+    }
+  }
 
+  /**
+   * 绘图
+   */
+  draw () {
+    this.context.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight)
+    // 画出地图
+    this.map.drawSelf(this.context)
   }
 
   /**
    * 重绘
    */
   repaint () {
-
+    // 绘图
+    this.draw()
     // 更新得分
     UTIL.updateScore(this.score)
     // 更新排行
