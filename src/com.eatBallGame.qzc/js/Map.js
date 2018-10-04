@@ -34,7 +34,7 @@ class Map {
     paint.fillRect(this.x, this.y, this.width, this.height)
     // 边框
     paint.beginPath()
-    paint.lineWidth = 1.5
+    paint.lineWidth = 1
     paint.strokeStyle = this.border_color
     paint.strokeRect(this.x + this.padding, this.y + this.padding,
     this.width - 2 * this.padding, this.height - 2 * this.padding)
