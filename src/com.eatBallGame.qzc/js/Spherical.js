@@ -53,10 +53,17 @@ class Spherical {
 	 * 画出自己
 	 */
   drawSelf (paint) {
+    // 身体
     paint.beginPath()
     paint.fillStyle = this.color
     paint.arc(this.centerX, this.centerY, this.getRadius(), 0, 2 * Math.PI)
     paint.fill()
+    // 名字
+    paint.beginPath()
+    paint.fillStyle = '#fff'
+    paint.font = '40px serif'
+    paint.textAlign = 'center'
+    paint.fillText(this.name, this.centerX, this.centerY + 10)
   }
 }
 
