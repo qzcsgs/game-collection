@@ -13,7 +13,7 @@ class Map {
      * String background 背景色
      * String border_color 边框颜色
 	 */
-  constructor (attr) {
+  constructor (attr = {}) {
     this.init(attr)
   }
 

@@ -29,6 +29,7 @@ export default {
   AiPlayer_weight_length: [100, 200],	// Ai玩家初始体重范围
   AiPlayer_color: ['#82A6F5', '#EAF048', '#9FF048', '#F6D6FF'],
   food_num: 1000, // 初始食物数量
+  food_weight: 10,  // 初始食物体重
   rankingList: [			// 排行列表
 
   ]

@@ -14,12 +14,11 @@ class Spherical {
 	 * int weight	// 重量
 	 * String color	// 背景色
 	 */
-  constructor (attr) {
+  constructor (attr = {}) {
     this.init(attr)
   }
 
   init (attr) {
-    if (!attr) return
 
     this.name = attr.name || ''
     this.centerX = attr.centerX || UTIL.getRandomXY('x')

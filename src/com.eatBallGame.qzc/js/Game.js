@@ -17,10 +17,8 @@ class Game {
   init () {
     // 获取相应元素
     this.container = document.getElementById('game')
-    const canvas = document.getElementById('canvas')
+    this.canvas = document.getElementById('canvas')
     this.context = canvas.getContext('2d')
-
-    this.game = document.getElementById('game')
 
     // 开始游戏按钮
     this.sectionButton = document.querySelector('.section-button')
@@ -44,18 +42,14 @@ class Game {
         window.setTimeout(callback, 1000 / 30)
       }
     console.log('游戏配置', CONFIG)
-    // 创建相应类实例
-    this.player = new Player({
 
-    })
-
-    this.event()
+    this.startEvent()
   }
 
   /**
-   * 事件
+   * 开始游戏前事件
    */
-  event () {
+  startEvent () {
     this.sectionButton.onclick = () => {
       switch (CONFIG.status) {
         case 'start':
@@ -87,7 +81,8 @@ class Game {
     console.log('开始游戏')
     this.updateConfig()
     // 更新UI
-    this.game.setAttribute('data-status', CONFIG.status)
+    this.container.setAttribute('data-status', CONFIG.status)
+    this.initObject()
     this.repaint()
   }
 
@@ -104,9 +99,52 @@ class Game {
   }
 
   /**
+   * 初始化相关对象
+   */
+  initObject () {
+    // 地图实例
+    this.map = new Map()
+    console.log('地图实例', this.map)
+
+    // 玩家实例
+    this.player = new Player({
+      name: CONFIG.player_name
+    })
+    console.log('玩家', this.player)
+
+    // AI实例
+    this.aiPlayerList = []
+    for (let i = 0; i < CONFIG.AiPlayer_num; i++) {
+      this.aiPlayerList.push(new AiPlayer({
+        name: UTIL.getRandomName()
+      }))
+    }
+    console.log('ai 玩家list', this.aiPlayerList)
+
+    // 食物实例
+    this.foodList = []
+    for (let i = 0; i < CONFIG.food_num; i++) {
+      this.foodList.push(new Food({
+        weight: CONFIG.food_weight
+      }))
+    }
+    console.log('食物list', this.aiPlayerList)
+
+    this.playingEvent()
+  }
+
+  /**
+   * 游戏中的事件 
+   */
+  playingEvent () {
+
+  }
+
+  /**
    * 重绘
    */
   repaint () {
+
     // 更新得分
     UTIL.updateScore(this.score)
     // 更新排行
