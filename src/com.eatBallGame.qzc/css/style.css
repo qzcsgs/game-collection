@@ -6,7 +6,6 @@
 	width: 800px;
 	height: 600px;
 	margin: 100px auto 0;
-	border: 1px solid red;
 }
 canvas {
 	display: block;
@@ -15,13 +14,13 @@ canvas {
 }
 .game-planel {
 	/* 置于画板之上 */
-	display: none;
+	display: block;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #333;
+	background-color: #777;
 	color: #fff;
 }
 
@@ -49,12 +48,12 @@ canvas {
 	box-shadow: 0 0 5px #CCFF66;
 }
 .game-start .section-myColor,
-.game-start .section-AiNum {
+.game-start .section-aiNum {
 	height: 2em;
 	margin-bottom: 10px;
 }
 .game-start .section-myColor:focus,
-.game-start .section-AiNum:focus {
+.game-start .section-aiNum:focus {
 	box-shadow: 0 0 5px #CCFF66;
 }
 .game-start .section-button {
@@ -66,12 +65,35 @@ canvas {
 	cursor: pointer;
 }
 
-/*根据游戏状态显示组件*/
-[data-status="start"] .game-start,
-[data-status="over"] .game-over {
-	display: inline-block;
+.game-playing {
+	width: 100%;
+	height: 100%;
 }
-[data-status="start"] .game-planel,
-[data-status="over"] .game-planel {
+.game-playing .score {
+	position: absolute;
+	top: 5%;
+	left: 3%;
+}
+.game-playing .ranking-list {
+	list-style-type: none;
+	position: absolute;
+	top: 5%;
+	right: 3%;
+	width: 100px;
+	height: 200px;
+	padding: 5px;
+	text-align: left;
+	font-size: 14px;
+	background: rgba(0, 0, 0, 0.3);
+}
+.game-playing .ranking-list li.my {
+	color: red;
+}
+
+/*根据游戏状态显示组件*/
+[data-status="start"] .game-start {
+	display: block;
+}
+[data-status="playing"] .game-playing {
 	display: block;
 }

@@ -2,6 +2,16 @@
  * 配置数据
  */
 export default {
+  /**
+   * 游戏状态
+   * start  游戏前
+   * playing 游戏中
+   * failed 游戏失败
+   * success 游戏成功
+   * all-success 游戏通关
+   * stop 游戏暂停
+   */
+  status: 'start',
   score: 0,				// 得分，1:1体重计算
   map_width: 1200,		// 地图宽度
   map_height: 1200,		// 地图高度
