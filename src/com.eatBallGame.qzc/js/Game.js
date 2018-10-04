@@ -131,7 +131,7 @@ class Game {
         weight: CONFIG.food_weight
       }))
     }
-    console.log('食物list', this.aiPlayerList)
+    console.log('食物list', this.foodList)
 
     this.playingEvent()
   }
@@ -140,7 +140,7 @@ class Game {
    * 游戏中的事件 
    */
   playingEvent () {
-    
+
   }
 
   /**
@@ -152,7 +152,11 @@ class Game {
     // 画出地图
     this.map.drawMap(this.context)
     // 画出食物
-    this.foodList.forEach((item) => {
+    this.foodList.forEach(item => {
+      item.drawSelf(this.context)
+    })
+    // 画出ai玩家
+    this.aiPlayerList.forEach(item => {
       item.drawSelf(this.context)
     })
     // 画出自己
