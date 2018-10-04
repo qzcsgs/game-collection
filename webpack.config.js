@@ -2,7 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: './src/com.eatBallGame.qzc/js/app.js',
@@ -18,12 +18,12 @@ module.exports = {
     rules: [{
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: "css-loader"
+        fallback: 'style-loader',
+        use: 'css-loader'
       })
     },
     {
-      test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"
+      test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'
     }
     ]
   },

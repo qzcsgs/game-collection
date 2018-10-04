@@ -1,17 +1,17 @@
 /**
  * 工具类
  */
-export default Util = {
-    /**
+export default {
+  /**
      * 碰撞检测(圆)
      */
-    collisionDetection () {
+  collisionDetection () {
 
-    },
-    /**
+  },
+  /**
      * 缓动函数
      */
-    easing () {
+  easing () {
 
-    }
+  }
 }

@@ -10,38 +10,37 @@ import Vomit from './Vomit'
  * 游戏类
  */
 class Game {
-    constructor () {
-        console.log(1)
-        this.init()
-    }
+  constructor () {
+    console.log(1)
+    this.init()
+  }
 
-    init () {
-        // 获取相应元素
-        this.container = doc.getElementById('game')
-        const canvas = doc.getElementById('canvas')
-        this.context = canvas.getContext('2d')
+  init () {
+    // 获取相应元素
+    this.container = doc.getElementById('game')
+    const canvas = doc.getElementById('canvas')
+    this.context = canvas.getContext('2d')
 
-        // 兼容定义 requestAnimFrame
-        window.requestAnimFrame =
+    // 兼容定义 requestAnimFrame
+    window.requestAnimFrame =
         window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame ||
         window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame ||
-        function(callback) {
-            window.setTimeout(callback, 1000 / 30)
+        function (callback) {
+          window.setTimeout(callback, 1000 / 30)
         }
-        console.log(CONFIG)
-        // 创建相应类实例
+    console.log(CONFIG)
+    // 创建相应类实例
+  }
 
-    }
-
-    /**
+  /**
      * 重绘
      */
-    repaint () {
-        requestAnimFrame(this.repaint)
-    }
+  repaint () {
+    requestAnimFrame(this.repaint)
+  }
 }
 
 export default Game
