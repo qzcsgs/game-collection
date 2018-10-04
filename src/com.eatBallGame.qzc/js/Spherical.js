@@ -19,7 +19,6 @@ class Spherical {
   }
 
   init (attr) {
-
     this.name = attr.name || ''
     this.centerX = attr.centerX || UTIL.getRandomXY('x')
     this.centerY = attr.centerY || UTIL.getRandomXY('y')
@@ -40,7 +39,7 @@ class Spherical {
 	 * @param {int} 半径
 	 */
   getRadius () {
-    // return radius
+    return parseInt(this.weight / 10)
   }
 
   /**
@@ -51,16 +50,14 @@ class Spherical {
   }
 
   /**
-	 * 获取绘图坐标
-	 */
-  getXY () {
-    // return {x,y}
-  }
-
-  /**
 	 * 画出自己
 	 */
-  draw () {}
+  drawSelf (paint) {
+    paint.beginPath()
+    paint.fillStyle = this.color
+    paint.arc(this.centerX, this.centerY, this.getRadius(), 0, 2 * Math.PI)
+    paint.fill()
+  }
 }
 
 export default Spherical

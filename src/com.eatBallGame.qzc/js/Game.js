@@ -42,7 +42,6 @@ class Game {
         window.setTimeout(callback, 1000 / 30)
       }
     console.log('游戏配置', CONFIG)
-
     this.startEvent()
   }
 
@@ -139,20 +138,21 @@ class Game {
    * 游戏中的事件 
    */
   playingEvent () {
-    // 临时调试代码
-    document.onkeydown = () => {
-      console.log('qzc')
-      this.map.x+=100
-    }
+    
   }
 
   /**
    * 绘图
    */
   draw () {
-    this.context.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight)
+    // 擦除可见区域
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     // 画出地图
-    this.map.drawSelf(this.context)
+    this.map.drawMap(this.context)
+    // 画出食物
+    this.foodList.forEach((item) => {
+      item.drawSelf(this.context)
+    })
   }
 
   /**

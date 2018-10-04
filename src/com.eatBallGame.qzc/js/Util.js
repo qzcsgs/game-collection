@@ -69,15 +69,22 @@ export default {
    * @param {String} type x 获取x值， y获取y值， undefined获取x和y的值
    */
   getRandomXY (type) {
+    // 最小坐标x： 地图坐标 + 左边内边距 + 防止溢出
+    // 最大坐标x： 地图坐标 + 地图自身宽度 = 地图右边x， 地图右边x - 右内边距 - 防止溢出
+    const xMin = CONFIG.map_x + CONFIG.map_padding + 10
+    const xMax = CONFIG.map_x + CONFIG.map_width - CONFIG.map_padding - 10
+    const yMin = CONFIG.map_y + CONFIG.map_padding + 10
+    const yMax = CONFIG.map_y + CONFIG.map_height - CONFIG.map_padding - 10
+
     if (type === 'x') {
-      const x = parseInt(Math.random() * CONFIG.map_width)
+      const x = parseInt(Math.random() * (xMax - xMin)) + xMin
       return x
     } else if (type === 'y') {
-      const y = parseInt(Math.random() * CONFIG.map_height)
+      const y = parseInt(Math.random() * (yMax - yMin)) + yMin
       return y
     } else {
-      const x = parseInt(Math.random() * CONFIG.map_width)
-      const y = parseInt(Math.random() * CONFIG.map_height)
+      const y = parseInt(Math.random() * (yMax - yMin)) + yMin
+      const x = parseInt(Math.random() * (xMax - xMin)) + xMin
       return { x, y }
     }
   },

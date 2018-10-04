@@ -18,16 +18,16 @@ class Map {
   }
 
   init (attr) {
-    this.x = attr.x || -parseInt((CONFIG.map_width + CONFIG.map_padding) / 2)
-    this.y = attr.y || -parseInt((CONFIG.map_height + CONFIG.map_padding) / 2)
+    this.x = attr.x || CONFIG.map_x
+    this.y = attr.y || CONFIG.map_y
     this.width = attr.width || CONFIG.map_width
     this.height = attr.width || CONFIG.map_height
-    this.padding = attr.padding || 100
+    this.padding = attr.padding || CONFIG.map_padding
     this.background = attr.background || CONFIG.map_bgColor
     this.border_color = attr.border_color || CONFIG.map_borderColor
   }
 
-  drawSelf (paint) {
+  drawMap (paint) {
     // 背景
     paint.beginPath()
     paint.fillStyle = this.background
