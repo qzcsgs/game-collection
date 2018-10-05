@@ -30,9 +30,22 @@ const givenNames = new Array(
 export default {
   /**
    * 碰撞检测(圆)
+   * @param {Object} circle1
+   * @param {Object} circle2
+   * @returns {Boolean} true 为碰撞，false 为未碰撞
    */
-  collisionDetection () {
+  collisionDetection (circle1, circle2) {
+    // 圆心距
+    let pp = Math.sqrt(Math.pow(circle1.centerX - circle2.centerX, 2) +
+      Math.pow(circle1.centerY - circle2.centerY, 2))
+    pp = parseInt(pp)
 
+    if (pp < circle1.getRadius() || pp < circle2.getRadius()) {
+      // 圆心距小于任意一个的半径，则为碰撞
+      return true
+    } else {
+      return false
+    }
   },
   /**
    * 缓动函数

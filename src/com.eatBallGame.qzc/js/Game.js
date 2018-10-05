@@ -94,6 +94,15 @@ class Game {
   }
 
   /**
+   * 游戏失败
+   */
+  fail () {
+    console.log('游戏失败')
+    CONFIG.status = 'fail'
+    this.spirit.player.life = false
+  }
+
+  /**
    * 更新配置文件
    */
   updateConfig () {
@@ -160,9 +169,50 @@ class Game {
   }
 
   /**
+   * 碰撞检测
+   */
+  collisionDetection () {
+    this.spirit.foodList.forEach(item => {
+      // 玩家与食物
+      if (UTIL.collisionDetection(item, this.spirit.player) && this.spirit.player.life) {
+        item.init({ // 重新初始化被吃掉的食物
+          weight: CONFIG.food_weight
+        })
+        this.spirit.player.addWeight(item.weight)
+      }
+
+      this.spirit.aiPlayerList.forEach(elem => {
+        // ai与玩家
+        if (UTIL.collisionDetection(elem, this.spirit.player) && this.spirit.player.life) {
+          // 碰撞
+          if (elem.getRadius() > this.spirit.player.getRadius()) {
+            elem.addWeight(this.spirit.player.weight)
+            // 游戏结束
+            this.fail()
+          } else {
+            elem.init({ name: UTIL.getRandomName() }) // 初始化被吃掉的ai
+            this.spirit.player.addWeight(elem.weight)
+          }
+        }
+
+        // ai与食物
+        if (UTIL.collisionDetection(item, elem)) {
+          item.init({ // 重新初始化被吃掉的食物
+            weight: CONFIG.food_weight
+          })
+          elem.addWeight(item.weight)
+        }
+      })
+    })
+  }
+
+  /**
    * 重绘
    */
   repaint () {
+    if (CONFIG.status !== 'playing') return
+    // 碰撞检测
+    this.collisionDetection()
     // 玩家永远在屏幕中心，移动其他元素
     this.spirit.player.move(this.mounseX, this.mounseY, this.spirit)
     // 绘图

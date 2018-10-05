@@ -13,6 +13,7 @@ class Spherical {
 	 * int centerY	// 圆心纵坐标
 	 * int weight	// 重量
 	 * String color	// 背景色
+   * Boolean life // 生命
 	 */
   constructor (attr = {}) {
     this.init(attr)
@@ -24,6 +25,7 @@ class Spherical {
     this.centerY = attr.centerY || UTIL.getRandomXY('y')
     this.weight = attr.weight || UTIL.getRandomWeight()
     this.color = attr.color || UTIL.getRandomColor()
+    this.life = attr.life || true
   }
 
   /**
@@ -64,6 +66,7 @@ class Spherical {
 	 * 画出自己
 	 */
   drawSelf (paint) {
+    if (!this.life) return
     // 身体
     paint.beginPath()
     paint.fillStyle = this.color
@@ -75,6 +78,14 @@ class Spherical {
     paint.font = '40px serif'
     paint.textAlign = 'center'
     paint.fillText(this.name, this.centerX, this.centerY + 10)
+  }
+
+  /**
+   * 增加体重
+   * @param {Number} Num 增加的体重数
+   */
+  addWeight (Num) {
+    this.weight += Num / 10
   }
 }
 
