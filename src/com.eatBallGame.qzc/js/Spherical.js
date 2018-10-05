@@ -85,10 +85,10 @@ class Spherical {
 
   /**
    * 增加体重
-   * @param {Number} Num 增加的体重数
+   * @param {Number} num 增加的体重数
    */
-  addWeight (Num) {
-    this.weight += parseInt(Num / 10)
+  addWeight (num) {
+    this.weight += parseInt(num / 5)
   }
 
   /**
