@@ -75,6 +75,7 @@ class Game {
     // 鼠标移动
     this.container.onmousemove = (e) => {
       if (CONFIG.status !== 'playing') return
+      // canvs中像素为实际大小的两倍
       this.mounseX = e.x * 2
       this.mounseY = e.y * 2
     }

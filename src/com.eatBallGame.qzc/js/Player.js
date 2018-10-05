@@ -18,7 +18,7 @@ class Player extends Spherical {
   move (endX, endY, spirit) {
     // 半径的一半
     const halfR = parseInt(this.getRadius() / 2)
-
+    
     if (endX > this.centerX &&
       this.centerX < (spirit.map.x + spirit.map.width - spirit.map.padding - halfR)) {
       // 终点大于起点，其他物体x为--
