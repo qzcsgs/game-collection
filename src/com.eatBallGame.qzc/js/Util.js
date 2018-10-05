@@ -82,7 +82,8 @@ export default {
   /**
    * 更新得分
    */
-  updateScore (elem) {
+  updateScore (elem, spirit) {
+    CONFIG.score = spirit.player.weight
     elem.innerText = CONFIG.score
   },
   /**

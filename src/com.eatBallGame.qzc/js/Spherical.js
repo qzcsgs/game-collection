@@ -26,6 +26,9 @@ class Spherical {
     this.weight = attr.weight || UTIL.getRandomWeight()
     this.color = attr.color || UTIL.getRandomColor()
     this.life = attr.life || true
+
+    // 自减体重
+    this.reduceWeight()
   }
 
   /**
@@ -59,7 +62,7 @@ class Spherical {
 	 * 获取速度
 	 */
   getSpeed () {
-    return 10
+    return 2000 / this.weight
   }
 
   /**
@@ -85,7 +88,17 @@ class Spherical {
    * @param {Number} Num 增加的体重数
    */
   addWeight (Num) {
-    this.weight += Num / 10
+    this.weight += parseInt(Num / 10)
+  }
+
+  /**
+   * 自减体重
+   */
+  reduceWeight () {
+    if (this.weight > 800) {
+      this.weight -= 5
+    }
+    setTimeout(this.reduceWeight.bind(this), 1000)
   }
 }
 

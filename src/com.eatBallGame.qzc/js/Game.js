@@ -190,8 +190,8 @@ class Game {
             // 游戏结束
             this.fail()
           } else {
-            elem.init({ name: UTIL.getRandomName() }) // 初始化被吃掉的ai
             this.spirit.player.addWeight(elem.weight)
+            elem.init({ name: UTIL.getRandomName() }) // 初始化被吃掉的ai
           }
         }
 
@@ -218,7 +218,7 @@ class Game {
     // 绘图
     this.draw()
     // 更新得分
-    UTIL.updateScore(this.score)
+    UTIL.updateScore(this.score, this.spirit)
     // 更新排行
     UTIL.updateRankingList(this.rankingList, this.spirit)
 
