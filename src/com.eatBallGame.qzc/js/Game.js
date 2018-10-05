@@ -75,8 +75,8 @@ class Game {
     // 鼠标移动
     this.container.onmousemove = (e) => {
       if (CONFIG.status !== 'playing') return
-      // 玩家永远在屏幕中心，移动其他元素
-      this.spirit.player.move(e.x, e.y, this.spirit)
+      this.mounseX = e.x * 2
+      this.mounseY = e.y * 2
     }
   }
 
@@ -124,7 +124,7 @@ class Game {
     }
 
     this.spirit = {
-      map: new Map(),   // 地图实例
+      map: new Map(), // 地图实例
       // 玩家实例
       player: new Player({
         name: CONFIG.player_name,
@@ -133,8 +133,8 @@ class Game {
         centerX: 800,
         centerY: 600
       }),
-      aiPlayerList,   // ai玩家列表
-      foodList,    // 食物实例
+      aiPlayerList, // ai玩家列表
+      foodList // 食物实例
     }
   }
 
@@ -162,6 +162,8 @@ class Game {
    * 重绘
    */
   repaint () {
+    // 玩家永远在屏幕中心，移动其他元素
+    this.spirit.player.move(this.mounseX, this.mounseY, this.spirit)
     // 绘图
     this.draw()
     // 更新得分

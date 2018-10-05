@@ -37,7 +37,7 @@ class Map {
     paint.lineWidth = 1
     paint.strokeStyle = this.border_color
     paint.strokeRect(this.x + this.padding, this.y + this.padding,
-    this.width - 2 * this.padding, this.height - 2 * this.padding)
+      this.width - 2 * this.padding, this.height - 2 * this.padding)
   }
 }
 

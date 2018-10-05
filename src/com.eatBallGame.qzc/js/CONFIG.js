@@ -19,7 +19,7 @@ export default {
   map_height: 3000,		// 地图高度
   map_bgColor: '#777', 	// 地图背景色
   map_borderColor: 'red', // 地图边框颜色
-  map_padding: 100,   // 地图内边距
+  map_padding: 100, // 地图内边距
   player_name: '曲智超', 	// 玩家初始姓名
   player_color: 'gree', 	// 玩家初始颜色
   player_weight: 200, // 玩家初始体重
@@ -29,7 +29,7 @@ export default {
   AiPlayer_weight_length: [200, 3000],	// Ai玩家初始体重范围
   AiPlayer_color: ['#82A6F5', '#EAF048', '#9FF048', '#F6D6FF'],
   food_num: 500, // 初始食物数量
-  food_weight: 50,  // 初始食物体重
+  food_weight: 50, // 初始食物体重
   rankingList: [			// 排行列表
 
   ]

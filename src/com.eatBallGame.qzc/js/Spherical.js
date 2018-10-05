@@ -28,11 +28,22 @@ class Spherical {
 
   /**
 	 * 移动函数
-	 * @param  {Number} x 终点圆心X
-	 * @param  {Number} y 终点圆心Y
+	 * @param  {Number} endX 终点圆心X
+	 * @param  {Number} endY 终点圆心Y
 	 * @return {[type]}   [description]
 	 */
-  move (endX, endY) {}
+  move (endX, endY) {
+    if (endX > this.centerX) {
+      this.centerX += this.getSpeed()
+    } else {
+      this.centerX -= this.getSpeed()
+    }
+    if (endY > this.centerY) {
+      this.centerY += this.getSpeed()
+    } else {
+      this.centerY -= this.getSpeed()
+    }
+  }
 
   /**
 	 * 获取半径
@@ -46,7 +57,7 @@ class Spherical {
 	 * 获取速度
 	 */
   getSpeed () {
-    // return speed
+    return 10
   }
 
   /**

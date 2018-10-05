@@ -55,7 +55,7 @@ export default {
     const plList = spirit.aiPlayerList.concat(spirit.player)
     // 排序
     plList.sort(compare('weight'))
-    
+
     let htmlText = []
 
     plList.some((item, index) => {
