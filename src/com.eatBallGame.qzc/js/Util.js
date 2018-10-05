@@ -43,17 +43,16 @@ export default {
   /**
    * 更新排行榜
    * @param {Object} elem 排行DOM
-   * @param {Object} player 玩家实例
-   * @param {Array} aiPlayerList ai玩家实例列表
+   * @param {Object} spirit 游戏元素实例
    */
-  updateRankingList (elem, player, aiPlayerList) {
+  updateRankingList (elem, spirit) {
     const compare = (attr) => (a, b) => {
       var value1 = a[attr]
       var value2 = b[attr]
       return value2 - value1
     }
     // 拼接玩家和ai成一个数组
-    const plList = aiPlayerList.concat(player)
+    const plList = spirit.aiPlayerList.concat(spirit.player)
     // 排序
     plList.sort(compare('weight'))
     

@@ -41,13 +41,14 @@ class Game {
         window.setTimeout(callback, 1000 / 30)
       }
     console.log('游戏配置', CONFIG)
-    this.startEvent()
+    this.event()
   }
 
   /**
-   * 开始游戏前事件
+   * 游戏事件
    */
-  startEvent () {
+  event () {
+    // 监听按钮
     this.sectionButton.onclick = () => {
       switch (CONFIG.status) {
         case 'start':
@@ -69,6 +70,13 @@ class Game {
           // TODOS:
           break
       }
+    }
+
+    // 鼠标移动
+    this.container.onmousemove = (e) => {
+      if (CONFIG.status !== 'playing') return
+      // 玩家永远在屏幕中心，移动其他元素
+      this.spirit.player.move(e.x, e.y, this.spirit)
     }
   }
 
@@ -100,46 +108,34 @@ class Game {
    * 初始化相关对象
    */
   initObject () {
-    // 地图实例
-    this.map = new Map()
-    console.log('地图实例', this.map)
-
-    // 玩家实例
-    this.player = new Player({
-      name: CONFIG.player_name,
-      color: CONFIG.player_color,
-      weight: CONFIG.player_weight,
-      centerX: 800,
-      centerY: 600
-    })
-    console.log('玩家', this.player)
-
     // AI实例
-    this.aiPlayerList = []
+    let aiPlayerList = []
     for (let i = 0; i < CONFIG.AiPlayer_num; i++) {
-      this.aiPlayerList.push(new AiPlayer({
+      aiPlayerList.push(new AiPlayer({
         name: UTIL.getRandomName()
       }))
     }
-    console.log('ai 玩家list', this.aiPlayerList)
 
-    // 食物实例
-    this.foodList = []
+    let foodList = []
     for (let i = 0; i < CONFIG.food_num; i++) {
-      this.foodList.push(new Food({
+      foodList.push(new Food({
         weight: CONFIG.food_weight
       }))
     }
-    console.log('食物list', this.foodList)
 
-    this.playingEvent()
-  }
-
-  /**
-   * 游戏中的事件 
-   */
-  playingEvent () {
-
+    this.spirit = {
+      map: new Map(),   // 地图实例
+      // 玩家实例
+      player: new Player({
+        name: CONFIG.player_name,
+        color: CONFIG.player_color,
+        weight: CONFIG.player_weight,
+        centerX: 800,
+        centerY: 600
+      }),
+      aiPlayerList,   // ai玩家列表
+      foodList,    // 食物实例
+    }
   }
 
   /**
@@ -149,17 +145,17 @@ class Game {
     // 擦除可见区域
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     // 画出地图
-    this.map.drawMap(this.context)
+    this.spirit.map.drawMap(this.context)
     // 画出食物
-    this.foodList.forEach(item => {
+    this.spirit.foodList.forEach(item => {
       item.drawSelf(this.context)
     })
     // 画出ai玩家
-    this.aiPlayerList.forEach(item => {
+    this.spirit.aiPlayerList.forEach(item => {
       item.drawSelf(this.context)
     })
     // 画出自己
-    this.player.drawSelf(this.context)
+    this.spirit.player.drawSelf(this.context)
   }
 
   /**
@@ -171,7 +167,7 @@ class Game {
     // 更新得分
     UTIL.updateScore(this.score)
     // 更新排行
-    UTIL.updateRankingList(this.rankingList, this.player, this.aiPlayerList)
+    UTIL.updateRankingList(this.rankingList, this.spirit)
 
     requestAnimFrame(this.repaint.bind(this))
   }
