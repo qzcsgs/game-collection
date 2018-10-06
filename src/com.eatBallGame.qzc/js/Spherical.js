@@ -113,7 +113,8 @@ class Spherical {
    */
   reduceWeight () {
     if (this.weight > 800) {
-      this.weight -= 5
+      // 每增加400体重，每秒多减5
+      this.weight -= parseInt(this.weight / 800) * 5
     }
     setTimeout(this.reduceWeight.bind(this), 1000)
   }
