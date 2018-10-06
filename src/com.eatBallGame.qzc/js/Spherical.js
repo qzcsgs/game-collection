@@ -1,4 +1,5 @@
 import UTIL from './UTIL'
+import CONFIG from './CONFIG'
 
 /**
  * 球类
@@ -40,7 +41,7 @@ class Spherical {
   move (endX, endY) {
     // 半径的一半
     const halfR = parseInt(this.getRadius() / 2)
-    
+
     if (endX > this.centerX &&
       this.centerX < (window.spirit.map.x + window.spirit.map.width - window.spirit.map.padding - halfR)) {
       // 终点大于起点，其他物体x为--
@@ -78,7 +79,7 @@ class Spherical {
 	 * 获取速度
 	 */
   getSpeed () {
-    return 2000 / this.weight
+    return CONFIG.player_weight * 8 / this.weight
   }
 
   /**
