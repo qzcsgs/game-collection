@@ -30,6 +30,9 @@ class Game {
     this.score = document.querySelector('.score span')
     this.rankingList = document.querySelector('.ranking-list')
 
+    // 背景音乐
+    this.bgAudio = document.getElementById('bg-audio')
+
     // 兼容定义 requestAnimFrame
     window.requestAnimFrame =
       window.requestAnimationFrame ||
@@ -90,6 +93,8 @@ class Game {
     // 更新UI
     this.container.setAttribute('data-status', CONFIG.status)
     this.initObject()
+    // 播放音乐
+    this.bgAudio.play()
     this.repaint()
   }
 
