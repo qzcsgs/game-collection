@@ -213,6 +213,15 @@ class Game {
     })
   }
 
+  move () {
+    // 玩家永远在屏幕中心，移动其他元素
+    window.spirit.player.move(this.mounseX, this.mounseY)
+    // ai移动
+    window.spirit.aiPlayerList.forEach(item => {
+      item.aiMove()
+    })
+  }
+
   /**
    * 重绘
    */
@@ -220,8 +229,8 @@ class Game {
     if (CONFIG.status !== 'playing') return
     // 碰撞检测
     this.collisionDetection()
-    // 玩家永远在屏幕中心，移动其他元素
-    window.spirit.player.move(this.mounseX, this.mounseY)
+    // 移动
+    this.move()
     // 绘图
     this.draw()
     // 更新得分

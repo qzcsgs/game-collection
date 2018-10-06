@@ -38,15 +38,31 @@ class Spherical {
 	 * @return {[type]}   [description]
 	 */
   move (endX, endY) {
-    if (endX > this.centerX) {
+    // 半径的一半
+    const halfR = parseInt(this.getRadius() / 2)
+    
+    if (endX > this.centerX &&
+      this.centerX < (window.spirit.map.x + window.spirit.map.width - window.spirit.map.padding - halfR)) {
+      // 终点大于起点，其他物体x为--
+      // 撞墙停止移动，地图右边x - 内边距 - 一半半径
       this.centerX += this.getSpeed()
-    } else {
+
+    } else if (endX < this.centerX &&
+      this.centerX > (window.spirit.map.x + window.spirit.map.padding + halfR)) {
+
       this.centerX -= this.getSpeed()
+
     }
-    if (endY > this.centerY) {
+    if (endY > this.centerY &&
+      this.centerY < (window.spirit.map.y + window.spirit.map.height - window.spirit.map.padding - halfR)) {
+
       this.centerY += this.getSpeed()
-    } else {
+
+    } else if (endY < this.centerY &&
+      this.centerY > (window.spirit.map.y + window.spirit.map.padding + halfR)) {
+
       this.centerY -= this.getSpeed()
+
     }
   }
 

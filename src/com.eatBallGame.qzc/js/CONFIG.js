@@ -26,7 +26,7 @@ export default {
   player_centerX: 100, // 玩家初始圆心横坐标
   player_centerY: 100, // 玩家初始圆心纵坐标
   AiPlayer_num: 100, // 初始AI玩家数量
-  AiPlayer_weight_length: [200, 2000],	// Ai玩家初始体重范围
+  AiPlayer_weight_length: [300, 2000],	// Ai玩家初始体重范围
   AiPlayer_color: ['#82A6F5', '#EAF048', '#9FF048', '#F6D6FF'],
   food_num: 500, // 初始食物数量
   food_weight: 25, // 初始食物体重
