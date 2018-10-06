@@ -99,7 +99,7 @@ class Game {
   fail () {
     console.log('游戏失败')
     CONFIG.status = 'fail'
-    this.spirit.player.life = false
+    window.spirit.player.life = false
   }
 
   /**
@@ -133,7 +133,7 @@ class Game {
       }))
     }
 
-    this.spirit = {
+    window.spirit = {
       map: new Map(), // 地图实例
       // 玩家实例
       player: new Player({
@@ -155,50 +155,52 @@ class Game {
     // 擦除可见区域
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     // 画出地图
-    this.spirit.map.drawMap(this.context)
+    window.spirit.map.drawMap(this.context)
     // 画出食物
-    this.spirit.foodList.forEach(item => {
+    window.spirit.foodList.forEach(item => {
       item.drawSelf(this.context)
     })
     // 画出ai玩家
-    this.spirit.aiPlayerList.forEach(item => {
+    window.spirit.aiPlayerList.forEach(item => {
       item.drawSelf(this.context)
     })
     // 画出自己
-    this.spirit.player.drawSelf(this.context)
+    window.spirit.player.drawSelf(this.context)
   }
 
   /**
    * 碰撞检测
    */
   collisionDetection () {
-    this.spirit.foodList.forEach(item => {
+    window.spirit.foodList.forEach(item => {
       // 玩家与食物
-      if (UTIL.collisionDetection(item, this.spirit.player) && this.spirit.player.life) {
+      if (UTIL.collisionDetection(item, window.spirit.player) && window.spirit.player.life) {
         item.init({ // 重新初始化被吃掉的食物
-          weight: CONFIG.food_weight
+          weight: CONFIG.food_weight,
         })
-        this.spirit.player.addWeight(item.weight)
+        window.spirit.player.addWeight(item.weight)
       }
 
-      this.spirit.aiPlayerList.forEach(elem => {
+      window.spirit.aiPlayerList.forEach(elem => {
         // ai与玩家
-        if (UTIL.collisionDetection(elem, this.spirit.player) && this.spirit.player.life) {
+        if (UTIL.collisionDetection(elem, window.spirit.player) && window.spirit.player.life) {
           // 碰撞
-          if (elem.getRadius() > this.spirit.player.getRadius()) {
-            elem.addWeight(this.spirit.player.weight)
+          if (elem.getRadius() > window.spirit.player.getRadius()) {
+            elem.addWeight(window.spirit.player.weight)
             // 游戏结束
             this.fail()
           } else {
-            this.spirit.player.addWeight(elem.weight)
-            elem.init({ name: UTIL.getRandomName() }) // 初始化被吃掉的ai
+            window.spirit.player.addWeight(elem.weight)
+            elem.init({    // 初始化被吃掉的ai
+              name: UTIL.getRandomName(),
+            })
           }
         }
 
         // ai与食物
         if (UTIL.collisionDetection(item, elem)) {
           item.init({ // 重新初始化被吃掉的食物
-            weight: CONFIG.food_weight
+            weight: CONFIG.food_weight,
           })
           elem.addWeight(item.weight)
         }
@@ -214,13 +216,13 @@ class Game {
     // 碰撞检测
     this.collisionDetection()
     // 玩家永远在屏幕中心，移动其他元素
-    this.spirit.player.move(this.mounseX, this.mounseY, this.spirit)
+    window.spirit.player.move(this.mounseX, this.mounseY)
     // 绘图
     this.draw()
     // 更新得分
-    UTIL.updateScore(this.score, this.spirit)
+    UTIL.updateScore(this.score)
     // 更新排行
-    UTIL.updateRankingList(this.rankingList, this.spirit)
+    UTIL.updateRankingList(this.rankingList)
 
     requestAnimFrame(this.repaint.bind(this))
   }

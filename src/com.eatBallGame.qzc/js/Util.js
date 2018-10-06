@@ -56,16 +56,15 @@ export default {
   /**
    * 更新排行榜
    * @param {Object} elem 排行DOM
-   * @param {Object} spirit 游戏元素实例
    */
-  updateRankingList (elem, spirit) {
+  updateRankingList (elem) {
     const compare = (attr) => (a, b) => {
       var value1 = a[attr]
       var value2 = b[attr]
       return value2 - value1
     }
     // 拼接玩家和ai成一个数组
-    const plList = spirit.aiPlayerList.concat(spirit.player)
+    const plList = window.spirit.aiPlayerList.concat(window.spirit.player)
     // 排序
     plList.sort(compare('weight'))
 
@@ -82,8 +81,8 @@ export default {
   /**
    * 更新得分
    */
-  updateScore (elem, spirit) {
-    CONFIG.score = spirit.player.weight
+  updateScore (elem) {
+    CONFIG.score = window.spirit.player.weight
     elem.innerText = CONFIG.score
   },
   /**
@@ -103,6 +102,10 @@ export default {
    * @param {String} type x 获取x值， y获取y值， undefined获取x和y的值
    */
   getRandomXY (type) {
+    if (window.spirit) {
+      CONFIG.map_x = spirit.map.x
+      CONFIG.map_y = spirit.map.y
+    }
     // 最小坐标x： 地图坐标 + 左边内边距 + 防止溢出
     // 最大坐标x： 地图坐标 + 地图自身宽度 = 地图右边x， 地图右边x - 右内边距 - 防止溢出
     const xMin = CONFIG.map_x + CONFIG.map_padding + 10
