@@ -6,7 +6,6 @@ import Spherical from './Spherical'
 class Player extends Spherical {
   constructor (attr) {
     super(attr)
-    // this.setTimeId = null
   }
 
   /**
@@ -16,49 +15,51 @@ class Player extends Spherical {
 	 */
   move (endX, endY) {
     // 半径的一半
-    const halfR = parseInt(this.getRadius() / 2)
+    const halfR = parseInt(this.getRadius() / 2),
+          map = window.spirit.map,
+          mapRightX = map.x + map.width - map.padding - halfR,
+          mapBottomY = map.y + map.height - map.padding - halfR,
+          mapLeftX = map.x + halfR + map.padding,
+          mapTopY = map.y + halfR + map.padding,
+          sx = endX - this.centerX,
+          sy = endY - this.centerY,
+          // 两点间距离
+          pp = Math.sqrt(Math.pow(sx, 2) + Math.pow(sy, 2)),
+          addX = sx * this.getSpeed() / pp,
+          addY = sy * this.getSpeed() / pp
     
-    if (endX > this.centerX &&
-      this.centerX < (window.spirit.map.x + window.spirit.map.width - window.spirit.map.padding - halfR)) {
-      // 终点大于起点，其他物体x为--
-      // 撞墙停止移动，地图右边x - 内边距 - 一半半径
-      window.spirit.map.x -= this.getSpeed()
-      window.spirit.aiPlayerList.forEach(item => {
-        item.centerX -= this.getSpeed()
-      })
-      window.spirit.foodList.forEach(item => {
-        item.centerX -= this.getSpeed()
-      })
-    } else if (endX < this.centerX &&
-      this.centerX > (window.spirit.map.x + window.spirit.map.padding + halfR)) {
-
-      window.spirit.map.x += this.getSpeed()
-      window.spirit.aiPlayerList.forEach(item => {
-        item.centerX += this.getSpeed()
-      })
-      window.spirit.foodList.forEach(item => {
-        item.centerX += this.getSpeed()
-      })
+    if (isNaN(addX) || isNaN(addY)) return  // 数值异常退出
+    
+    // 相反方向移动其他元素
+    if (this.centerX <= mapRightX && addX > 0) {
+      this.moveOther(addX, 'x')
+    } else if (this.centerX >= mapLeftX && addX < 0) {
+      this.moveOther(addX, 'x')
     }
-    if (endY > this.centerY &&
-      this.centerY < (window.spirit.map.y + window.spirit.map.height - window.spirit.map.padding - halfR)) {
 
-      window.spirit.map.y -= this.getSpeed()
+    if (this.centerY <= mapBottomY && addY > 0) {
+      this.moveOther(addY, 'y')
+    } else if (this.centerY >= mapTopY && addY < 0) {
+      this.moveOther(addY, 'y')
+    }
+  }
+
+  moveOther (num, type) {
+    if (type === 'x') {
+      window.spirit.map.x -= num
       window.spirit.aiPlayerList.forEach(item => {
-        item.centerY -= this.getSpeed()
+        item.centerX -= num
       })
       window.spirit.foodList.forEach(item => {
-        item.centerY -= this.getSpeed()
+        item.centerX -= num
       })
-    } else if (endY < this.centerY &&
-      this.centerY > (window.spirit.map.y + window.spirit.map.padding + halfR)) {
-
-      window.spirit.map.y += this.getSpeed()
+    } else if (type === 'y') {
+      window.spirit.map.y -= num
       window.spirit.aiPlayerList.forEach(item => {
-        item.centerY += this.getSpeed()
+        item.centerY -= num
       })
       window.spirit.foodList.forEach(item => {
-        item.centerY += this.getSpeed()
+        item.centerY -= num
       })
     }
   }

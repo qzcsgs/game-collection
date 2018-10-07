@@ -151,6 +151,10 @@ class Game {
       aiPlayerList, // ai玩家列表
       foodList // 食物实例
     }
+
+    // 鼠标默认位置
+    this.mounseX = window.spirit.player.centerX
+    this.mounseY = window.spirit.player.centerY
   }
 
   /**

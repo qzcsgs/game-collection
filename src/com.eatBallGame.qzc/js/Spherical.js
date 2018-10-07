@@ -40,30 +40,32 @@ class Spherical {
 	 */
   move (endX, endY) {
     // 半径的一半
-    const halfR = parseInt(this.getRadius() / 2)
-
-    if (endX > this.centerX &&
-      this.centerX < (window.spirit.map.x + window.spirit.map.width - window.spirit.map.padding - halfR)) {
-      // 终点大于起点，其他物体x为--
-      // 撞墙停止移动，地图右边x - 内边距 - 一半半径
-      this.centerX += this.getSpeed()
-
-    } else if (endX < this.centerX &&
-      this.centerX > (window.spirit.map.x + window.spirit.map.padding + halfR)) {
-
-      this.centerX -= this.getSpeed()
-
+    const halfR = parseInt(this.getRadius() / 2),
+          map = window.spirit.map,
+          mapRightX = map.x + map.width - map.padding - halfR,
+          mapBottomY = map.y + map.height - map.padding - halfR,
+          mapLeftX = map.x + halfR + map.padding,
+          mapTopY = map.y + halfR + map.padding,
+          sx = endX - this.centerX,
+          sy = endY - this.centerY,
+          // 两点间距离
+          pp = Math.sqrt(Math.pow(sx, 2) + Math.pow(sy, 2)),
+          addX = sx * this.getSpeed() / pp,
+          addY = sy * this.getSpeed() / pp
+    
+    if (isNaN(addX) || isNaN(addY)) return  // 数值异常退出
+    
+    // 边界
+    if (this.centerX <= mapRightX && addX > 0) {
+      this.centerX += addX
+    } else if (this.centerX >= mapLeftX && addX < 0) {
+      this.centerX += addX
     }
-    if (endY > this.centerY &&
-      this.centerY < (window.spirit.map.y + window.spirit.map.height - window.spirit.map.padding - halfR)) {
 
-      this.centerY += this.getSpeed()
-
-    } else if (endY < this.centerY &&
-      this.centerY > (window.spirit.map.y + window.spirit.map.padding + halfR)) {
-
-      this.centerY -= this.getSpeed()
-
+    if (this.centerY <= mapBottomY && addY > 0) {
+      this.centerY += addY
+    } else if (this.centerY >= mapTopY && addY < 0) {
+      this.centerY += addY
     }
   }
 
