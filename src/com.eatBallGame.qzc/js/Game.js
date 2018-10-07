@@ -181,16 +181,23 @@ class Game {
    * 碰撞检测
    */
   collisionDetection () {
+    let aiItemR = 0,
+        aiElemR = 0,
+        playerR = 0
+
     // for循环嵌套使用外层小内层大
     window.spirit.aiPlayerList.forEach((aiItem, aiIndex) => {
       // ai与玩家
       if (UTIL.collisionDetection(aiItem, window.spirit.player) && window.spirit.player.life) {
+        aiItemR = aiItem.getRadius()
+        playerR = window.spirit.player.getRadius()
+        
         // 碰撞
-        if (aiItem.getRadius() > window.spirit.player.getRadius()) {
+        if (aiItemR > playerR) {
           aiItem.addWeight(window.spirit.player.weight)
           // 游戏结束
           this.fail()
-        } else {
+        } else if (aiItemR < playerR) {
           window.spirit.player.addWeight(aiItem.weight)
           aiItem.init({    // 初始化被吃掉的ai
             name: UTIL.getRandomName()
@@ -203,12 +210,16 @@ class Game {
         if (index === aiIndex) return // 自己和自己比较时退出
         
         if (UTIL.collisionDetection(aiItem, elem)) {
-          if (aiItem.getRadius() > elem.getRadius()){
+          // 获取ai半径
+          aiItemR = aiItem.getRadius()
+          aiElemR = elem.getRadius()
+
+          if (aiItemR > aiElemR){
             aiItem.addWeight(elem.weight)
             elem.init({
               name: UTIL.getRandomName()
             })
-          } else {
+          } else if (aiItemR < aiElemR) {
             elem.addWeight(aiItem.weight)
             aiItem.init({
               name: UTIL.getRandomName()

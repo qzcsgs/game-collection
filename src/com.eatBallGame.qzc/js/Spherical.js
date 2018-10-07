@@ -1,5 +1,4 @@
 import UTIL from './UTIL'
-import CONFIG from './CONFIG'
 
 /**
  * 球类
@@ -74,14 +73,30 @@ class Spherical {
 	 * @param {int} 半径
 	 */
   getRadius () {
-    return parseInt(this.weight / 10)
+    if (this.weight <= 2000) return this.weight / 10
+
+    let r = 200
+    const lastWeight = this.weight - 2000
+    const len = parseInt(lastWeight / 1000) + 1
+
+    for (let i = 2; i <= len + 1; i++) {
+      if (i === len + 1) {
+        r += (lastWeight % 1000) / (i * 10)
+      } else {
+        r += 1000 / (i * 10)
+      }
+    }
+
+    return r
   }
 
   /**
 	 * 获取速度
 	 */
   getSpeed () {
-    return CONFIG.player_weight * 8 / this.weight
+    const speed =  200 * 8 / this.weight
+    // 因为不能分身最小速度限制为1
+    return speed < 1 ? 1 : speed
   }
 
   /**
