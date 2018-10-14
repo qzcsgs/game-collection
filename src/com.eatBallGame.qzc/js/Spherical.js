@@ -38,6 +38,18 @@ class Spherical {
 	 * @return {[type]}   [description]
 	 */
   move (endX, endY) {
+    if (!endX || !endY) {
+      return
+    }
+
+    const sx = endX - this.centerX,
+          sy = endY - this.centerY
+    
+    // 终点和起点差值在100内不运动
+    if ((sx >= -100 && sx <= 100) && (sy >= -100 && sy <= 100)) {
+      return
+    }
+
     // 半径的一半
     const halfR = parseInt(this.getRadius() / 2),
           map = window.spirit.map,
@@ -45,8 +57,6 @@ class Spherical {
           mapBottomY = map.y + map.height - map.padding - halfR,
           mapLeftX = map.x + halfR + map.padding,
           mapTopY = map.y + halfR + map.padding,
-          sx = endX - this.centerX,
-          sy = endY - this.centerY,
           // 两点间距离
           pp = Math.sqrt(Math.pow(sx, 2) + Math.pow(sy, 2)),
           addX = sx * this.getSpeed() / pp,
