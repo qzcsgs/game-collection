@@ -187,8 +187,8 @@ class Game {
     window.spirit.aiPlayerList.forEach(item => {
       item.drawSelf(this.context)
     })
-    // 画出自己
-    window.spirit.player.drawSelf(this.context)
+    // 画出玩家
+    window.spirit.player.drawPlayer(this.context)
     // 画出呕吐物
     window.spirit.vomitList.forEach(item => {
       item.drawSelf(this.context)
@@ -248,7 +248,7 @@ class Game {
 
       window.spirit.foodList.forEach(foodItem => {
         // 玩家与食物
-        if (UTIL.collisionDetection(foodItem, window.spirit.player) && window.spirit.player.life) {
+        if (window.spirit.player.life && UTIL.collisionDetection(foodItem, window.spirit.player)) {
           foodItem.init({ // 重新初始化被吃掉的食物
             weight: CONFIG.food_weight,
           })
@@ -261,6 +261,19 @@ class Game {
           })
           aiItem.addWeight(foodItem.weight)
         }
+      })
+
+      window.spirit.vomitList.forEach((vomitItem, vomitIndex) => {
+        // 吐球与ai
+        if (UTIL.collisionDetection(vomitItem, aiItem)) {
+          aiItem.weight += vomitItem.weight // 吃吐球吃多少加多少
+          window.spirit.vomitList.splice(vomitIndex, 1)
+        }
+        // 吐球与玩家
+        // if (window.spirit.player.life && UTIL.collisionDetection(vomitItem, window.spirit.player)) {
+        //   window.spirit.player.weight += vomitItem.weight
+        //   window.spirit.vomitList.splice(vomitIndex, 1)
+        // }
       })
     })
   }

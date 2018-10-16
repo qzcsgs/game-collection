@@ -111,6 +111,7 @@ class Spherical {
 
   /**
 	 * 画出自己
+   * @param {Object} paint 画笔
 	 */
   drawSelf (paint) {
     if (!this.life) return

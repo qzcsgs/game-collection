@@ -15,6 +15,11 @@ class Player extends Spherical {
 	 * @param  {Number} endY 终点圆心Y
 	 */
   move (endX, endY) {
+    if (!endX || !endY) {
+      return
+    }
+    this.endX = endX
+    this.endY = endY
     // 半径的一半
     const halfR = parseInt(this.getRadius() / 2),
           map = window.spirit.map,
@@ -69,6 +74,23 @@ class Player extends Spherical {
         item.centerY -= num
       })
     }
+  }
+
+  /**
+   * 加入方向指示
+   * @param {Object} paint 画笔
+   */
+  drawPlayer (paint) {
+    this.drawSelf(paint)
+
+    const k = (this.endY - this.centerY) / (this.endX - this.centerX)
+    let y = this.centerY - ((this.getRadius() + 20) * k) / (Math.sqrt(1 + k * k)),
+        x = this.centerX - (this.centerY - y) / k
+    // TODO: 方向指示器
+    paint.beginPath()
+    paint.fillStyle = this.color
+    paint.arc(x, y, 20, 0, 2 * Math.PI)
+    paint.fill()
   }
 
   /**
