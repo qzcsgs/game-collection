@@ -1,4 +1,5 @@
 import Spherical from './Spherical'
+import Vomit from './Vomit'
 
 /**
  * 玩家类
@@ -53,12 +54,18 @@ class Player extends Spherical {
       window.spirit.foodList.forEach(item => {
         item.centerX -= num
       })
+      window.spirit.vomitList.forEach(item => {
+        item.centerX -= num
+      })
     } else if (type === 'y') {
       window.spirit.map.y -= num
       window.spirit.aiPlayerList.forEach(item => {
         item.centerY -= num
       })
       window.spirit.foodList.forEach(item => {
+        item.centerY -= num
+      })
+      window.spirit.vomitList.forEach(item => {
         item.centerY -= num
       })
     }
@@ -69,7 +76,15 @@ class Player extends Spherical {
 	 * @return {[type]} [description]
 	 */
   spit () {
+    if (this.weight < 1000) return
 
+    window.spirit.vomitList.push(new Vomit({
+      centerX: this.centerX,
+      centerY: this.centerY,
+      weight: 200,
+      color: this.color
+    }))
+    this.weight -= 200
   }
 
   /**

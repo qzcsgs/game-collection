@@ -82,6 +82,19 @@ class Game {
       this.mounseX = e.x * 2
       this.mounseY = e.y * 2
     }
+
+    // 键盘事件
+    document.onkeydown = (e) => {
+      var key = e.keyCode || e.which || e.charCode
+      if (key === 32 && CONFIG.status === 'playing') {
+        // 吐球防抖
+        if (this.timeId) return
+        this.timeId = setTimeout(() => {
+          this.timeId = null
+        }, 100)
+        window.spirit.player.spit()
+      }
+    }
   }
 
   /**
@@ -149,7 +162,8 @@ class Game {
         centerY: 600
       }),
       aiPlayerList, // ai玩家列表
-      foodList // 食物实例
+      foodList, // 食物实例
+      vomitList: []
     }
 
     // 鼠标默认位置
@@ -175,6 +189,10 @@ class Game {
     })
     // 画出自己
     window.spirit.player.drawSelf(this.context)
+    // 画出呕吐物
+    window.spirit.vomitList.forEach(item => {
+      item.drawSelf(this.context)
+    })
   }
 
   /**
