@@ -83,14 +83,14 @@ class Player extends Spherical {
   drawPlayer (paint) {
     this.drawSelf(paint)
 
-    const k = (this.endY - this.centerY) / (this.endX - this.centerX)
-    let y = this.centerY - ((this.getRadius() + 20) * k) / (Math.sqrt(1 + k * k)),
-        x = this.centerX - (this.centerY - y) / k
     // TODO: 方向指示器
-    paint.beginPath()
-    paint.fillStyle = this.color
-    paint.arc(x, y, 20, 0, 2 * Math.PI)
-    paint.fill()
+    // const k = (this.endY - this.centerY) / (this.endX - this.centerX)
+    // let y = this.centerY - ((this.getRadius() + 20) * k) / (Math.sqrt(1 + k * k)),
+    //     x = this.centerX - (this.centerY - y) / k
+    // paint.beginPath()
+    // paint.fillStyle = this.color
+    // paint.arc(x, y, 20, 0, 2 * Math.PI)
+    // paint.fill()
   }
 
   /**
