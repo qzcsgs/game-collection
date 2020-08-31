@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  entry: './src/com.eatBallGame.qzc/js/app.js',
+  entry: './src/eat-ball-game/js/app.js',
   output: {
     filename: 'app.min.js',
     path: path.resolve(__dirname, 'dist')
@@ -31,7 +31,7 @@ module.exports = {
     // 加入 html 模板任务
     new HtmlWebpackPlugin({
       // 模板文件
-      template: './src/com.eatBallGame.qzc/eatBallGame.html',
+      template: './src/eat-ball-game/index.html',
       // 打包后文件名称，会自动放到 output 指定的 dist 目录
       filename: 'index.html'
     }),
